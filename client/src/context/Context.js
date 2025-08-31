@@ -91,14 +91,13 @@ const ContextProvider = (props) => {
                 setCurrentMessages(prev => [...prev, { role: 'assistant', content: "" }]);
 
                 const words = data.response.split(" ");
-                let responseSoFar = "";
                 for (let i = 0; i < words.length; i++) {
                     setTimeout(() => {
-                        responseSoFar += words[i] + " ";
+                        const currentResponse = words.slice(0, i + 1).join(" ") + " ";
                         setCurrentMessages(prev => {
                             const newMessages = [...prev];
                             if (newMessages.length > 0) {
-                                newMessages[newMessages.length - 1].content = responseSoFar;
+                                newMessages[newMessages.length - 1].content = currentResponse;
                             }
                             return newMessages;
                         });
